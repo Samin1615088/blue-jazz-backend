@@ -26,6 +26,7 @@ client.connect(err => {
     const servicesCollection = client.db("blueJazzDb").collection("services");
     console.log("mongodb connected successfully");
     client.close();
+
 });
 //mongodb << <<
 
