@@ -69,6 +69,7 @@ app.get('/', (req, res) => {
 client.connect(err => {
     const servicesCollection = client.db("blueJazzDb").collection("allServices");
     const customerTestimonialsCollection = client.db("blueJazzDb").collection("customerTestimonials");
+    const orderedServicesCollection = client.db("blueJazzDb").collection("allOrderedServices");
     console.log("mongodb connected successfully");
 
     // get all Services from mongodb >>>> 
@@ -104,6 +105,20 @@ client.connect(err => {
             })
     })
     // get orderedService from mongodb <<<<
+
+    // post orderedService on mongodb>>>> 
+    app.post('/processOrder', (req, res) => {
+        const orderedService = req.body
+        console.log("post orderedService req client->*server->mongodb", orderedService);
+
+        orderedServicesCollection
+            .insertOne(orderedService)
+            .then(result => {
+                console.log(result);
+                res.send(result.insertedCount > 0);
+            }).catch(error => console.log(error))
+    })
+    // post orderedService on mongodb<<<<<
 
 });
 //mongodb << << << <<
