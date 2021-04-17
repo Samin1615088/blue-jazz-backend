@@ -73,7 +73,7 @@ client.connect(err => {
 
     // get all Services from mongodb >>>> 
     app.get('/allServices', (req, res) => {
-        console.log("getALLSERVICES req", req);
+        console.log("get ALL-SERVICES req", req);
         servicesCollection.find({})
             .toArray((err, documents) => {
                 console.log(err, documents);
@@ -82,7 +82,7 @@ client.connect(err => {
     })
     // get all Services from mongodb <<<<
 
-    // get all Services from mongodb >>>> 
+    // get all Testimonials from mongodb >>>> 
     app.get('/allTestimonials', (req, res) => {
         console.log("getALLTESTIMONIALS req", req);
         customerTestimonialsCollection.find({})
@@ -91,7 +91,19 @@ client.connect(err => {
                 res.send(documents);
             })
     })
-    // get all Services from mongodb <<<<
+    // get all Testimonials from mongodb <<<<
+
+    // get orderedService from mongodb >>>> 
+    app.get('/getOrderedService/:serviceId', (req, res) => {
+        console.log("get orderedService req", req.params.serviceId, ObjectId(req.params.serviceId));
+        const id = ObjectId(req.params.serviceId);
+        servicesCollection.find({ _id: id })
+            .toArray((err, documents) => {
+                console.log('error', err, 'documents', documents[0]);
+                res.send(documents[0]);
+            })
+    })
+    // get orderedService from mongodb <<<<
 
 });
 //mongodb << << << <<
