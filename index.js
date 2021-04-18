@@ -70,6 +70,7 @@ client.connect(err => {
     const servicesCollection = client.db("blueJazzDb").collection("allServices");
     const customerTestimonialsCollection = client.db("blueJazzDb").collection("customerTestimonials");
     const orderedServicesCollection = client.db("blueJazzDb").collection("allOrderedServices");
+    const adminCollection = client.db("blueJazzDb").collection("admins");
     console.log("mongodb connected successfully");
 
     // get all Services from mongodb >>>> 
@@ -119,6 +120,78 @@ client.connect(err => {
             }).catch(error => console.log(error))
     })
     // post orderedService on mongodb<<<<<
+
+
+
+
+
+
+
+
+    //code for some troubling section>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //get uesr ordered service>>
+    app.get('/getUserServices/:userEmail', (req, res) => {
+        const email = req.params.userEmail;
+        console.log('getUserServices', { email });
+        orderedServicesCollection.find({ email })
+            .toArray((err, documents) => {
+                console.log('error', err, 'documents', documents);
+                res.send(documents);
+            })
+    })
+    //get uesr ordered service<<
+
+    //get admin ordered service>>
+    app.get('/getAdminServices', (req, res) => {
+        console.log('getAdminServices');
+        orderedServicesCollection.find()
+            .toArray((err, documents) => {
+                console.log('error', err, 'documents', documents);
+                res.send(documents);
+            })
+    })
+    //get admin ordered service<<
+
+
+
+    // post user review on mongodb>>>> 
+    app.post('/addReview', (req, res) => {
+        const review = req.body
+        console.log("post user review client->*server->mongodb", review);
+
+        customerTestimonialsCollection
+            .insertOne(review)
+            .then(result => {
+                console.log('result', result);
+                res.send(result.insertedCount > 0);
+            }).catch(error => console.log(error))
+    })
+    // post user review on mongodb<<<< 
+
+    // post add new Admin on mongodb>>>> 
+    app.post('/addAdmin', (req, res) => {
+        const newAdmin = req.body
+        console.log("post add new Admin client->*server->mongodb", newAdmin);
+
+        adminCollection
+            .insertOne(newAdmin)
+            .then(result => {
+                console.log('result', result);
+                res.send(result.insertedCount > 0);
+            }).catch(error => console.log(error))
+    })
+    // post add new Admin on mongodb<<<< 
+
+
+    app.post('/isAdmin', (req, res) => {
+        const email = req.body.email;
+        adminCollection.find({ email: email })
+            .toArray((err, doctors) => {
+                res.send(doctors.length > 0);
+            })
+    })
+    //code for some troubling section<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 
 });
 //mongodb << << << <<
