@@ -156,33 +156,35 @@ client.connect(err => {
         const serviceDescription = req.body.serviceDescription;
         const price = req.body.price;
         console.log(" in server ", serviceImg, serviceName, serviceDescription, price);
-        const filePath = `${__dirname}/serviceimages/${serviceImg.name}`;
-        serviceImg.mv(filePath, err => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send({ msg: 'failed to upload image' })
-            }
-            const newImg = fs.readFileSync(filePath);
+
+        //--------> this is server side file uploading code
+        // const filePath = `${__dirname}/serviceimages/${serviceImg.name}`;
+        // serviceImg.mv(filePath, err => {
+        //     if (err) {
+        //         console.log(err);
+        //         return res.status(500).send({ msg: 'failed to upload image' })
+        //     }
+            const newImg = req.files.file.data; //fs.readFileSync(filePath);
             const encImg = newImg.toString();
 
             const image = {
                 contentType: req.files.file.mimetype,
                 size: req.files.file.size,
-                img: Buffer(encImg, 'base64')
+                img: Buffer.from(encImg, 'base64')
             };
             servicesCollection.insertOne({ serviceImg: image, serviceName, serviceDescription, price })
                 .then(result => {
-                    fs.remove(filePath, error => {
-                        if (error) {
-                            console.log(error)
-                        }
+                    // fs.remove(filePath, error => {
+                    //     if (error) {
+                    //         console.log(error)
+                    //     }
                         res.send(result.insertedCount > 0)
-                    })
+                    // })
 
                 })
             // return res.send({name: serviceImg.name, path:`/${serviceImg.name}`})
-        })
-    })
+         })
+    // })
     // app.post('/addServices', (req, res) => {
     //     const serviceImg = req.files.file;
     //     const serviceName = req.body.serviceName;
