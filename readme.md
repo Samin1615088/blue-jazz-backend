@@ -1,34 +1,25 @@
-# BLUE JAZZ 
-
-Project's Live site 
-[FRONTEND](https://bluejazz-2eacf.web.app/).
-[BACKEND](https://aqueous-earth-48070.herokuapp.com/).
+# BLUE JAZZ WEBSITE-backend
+This is a website of an event management company named BLUE JAZZ who provides different facilities in larger exciting music festivals around the world.<br/>
 
 
-# DESCRIPTION
+- users can checkout, give reviews on orders, and pay with "stripe payment gateway".
+- reviews are displayed dynamically on the home page.
+- admin can add new services, also can add new admin and see all orders of other customers.
 
-This is a website of a event management company named BLUE JAZZ who provides different facilities in larger exciting MUSIC FESTIVAL around the world. They provide food , accommodation and other entertainments around the music concert campus.
+<br/>
 
-### In The website user can add, remove, review their orders getting signed in through google sign in authentication system.
-### In The website admin can read, delete,  update all the services of the users.
-## TECHNOLOGY I USED
+Demo Website [LiveSite Link](https://bluejazz-2eacf.web.app/) <br/>
 
-#### `FIREBASE AUTHENTICATION`
+Frontend github: [Code Link](https://github.com/Samin1615088/blue-jazz-frontend)<br/>
+Backend github: [Code Link](https://github.com/Samin1615088/blue-jazz-backend)<br/>
 
-#### `REACT PRIVATE ROUTING`
 
-#### `BOOTSTRAP`
 
-#### `REACT FORM HOOK`
+## Technologies Used For 
 
-#### `USECONTEXT HOOK`
+### Frontend
+`REACT ROUTER`  `BOOTSTRAP`  `REACT FORM HOOK`  `USECONTEXT HOOK`  `USESTATE HOOK`  `FONT AWESOME`
 
-#### `USESTATE HOOK`
 
-#### `FONT AWESOME`
-
-#### `NODE.JS`
-
-#### `EXPRESS`
-
-#### `MONGODB`
+###  Backend
+`EXPRESS.JS`  `NODE.JS`  `MONGODB ATLAS DATABASE`  `BODY-PARSER`  `FIREBASE AUTHENTICATION`  `HEROKU HOSTING`  `FIREBASE HOSTING`
